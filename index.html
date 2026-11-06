@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMM Grammy Place | Strategic Growth & 3 Engines</title>
+    <!-- โหลด Font ทันสมัย -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Prompt:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- โหลด 3D Tilt Effect Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --surface-color: rgba(20, 25, 35, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-glow: #8A2BE2;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(138, 43, 226, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.15), transparent 25%);
+            color: var(--text-main);
+            font-family: 'Prompt', 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Glassmorphism */
+        .sidebar {
+            background: var(--surface-color);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .brand h2 {
+            font-weight: 800;
+            background: linear-gradient(135deg, #E2E8F0 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .sidebar p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 3rem 4rem;
+        }
+
+        .header-section {
+            margin-bottom: 4rem;
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            background: linear-gradient(to right, #60A5FA, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        /* 3D Grid สำหรับ Growth Engines */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+            perspective: 1000px; /* เปิดมิติ 3D */
+        }
+
+        .glass-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(167, 139, 250, 0.5);
+        }
+
+        /* องค์ประกอบภายใน Card ให้ดูลอยตัวออกมา */
+        .glass-card h3 {
+            font-size: 1.5rem;
+            margin: 0 0 1.5rem 0;
+            color: #E2E8F0;
+            transform: translateZ(30px); /* 3D pop out */
+        }
+
+        .glass-card ul {
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            transform: translateZ(20px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            transform: translateZ(40px);
+        }
+
+        .badge-1 { background: rgba(59, 130, 246, 0.2); color: #60A5FA; border: 1px solid rgba(59,130,246,0.3); }
+        .badge-2 { background: rgba(167, 139, 250, 0.2); color: #A78BFA; border: 1px solid rgba(167,139,250,0.3); }
+        .badge-3 { background: rgba(244, 114, 182, 0.2); color: #F472B6; border: 1px solid rgba(244,114,182,0.3); }
+
+        /* Tenant Pipeline Section */
+        .tenant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tenant-item {
+            background: linear-gradient(180deg, rgba(30,41,59,0.4) 0%, rgba(15,23,42,0.4) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tenant-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tenant-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(180deg, rgba(30,41,59,0.8) 0%, rgba(15,23,42,0.8) 100%);
+        }
+
+        .tenant-item:hover::before { opacity: 1; }
+
+        .tenant-item h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            color: #F8FAFC;
+        }
+
+        .tenant-item p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .metric-highlight {
+            font-family: 'Inter', sans-serif;
+            color: #38BDF8;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard { grid-template-columns: 1fr; }
+            .sidebar { height: auto; position: relative; padding: 1.5rem; }
+            .main-content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>GMM Grammy Place</h2>
+            <p>Integrated Property & Asset Management Strategy[cite: 2]</p>
+        </div>
+        <div style="margin-top: auto;">
+            <p style="font-size: 0.8rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                Prepared for: Geurt Fah Co., Ltd.<br>
+                Interactive Executive Dashboard
+            </p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header-section">
+            <h1>The Three Growth Engines</h1>
+            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px; line-height: 1.6;">
+                กลยุทธ์การพลิกโฉมอาคารผ่าน 3 แกนหลัก ขับเคลื่อนการจัดการพื้นที่ เพิ่ม NOI และสร้างประสบการณ์ใหม่ให้ผู้ใช้อาคาร พร้อมเป้าหมายรักษาผู้เช่าหลักและบริหารพื้นที่ว่างเชิงรุก[cite: 2]
+            </p>
+        </div>
+
+        <!-- 3D Cards Section -->
+        <div class="grid-3">
+            
+            <!-- Engine 1 -->
+            <div class="glass-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                <span class="badge badge-1">First Engine: Core Business</span>
+                <h3>ปกป้องและเพิ่มมูลค่า Core Asset</h3>
+                <ul>
+                    <li>เจรจาต่อสัญญาเช่าหลัก (GMM Group) พื้นที่ 17,137.33 ตร.ม. ก่อนหมดวาระ เม.ย. 2027[cite: 2]</li>
+                    <li>ตรวจสอบความถูกต้องของ NLA และ Rent roll ปัจจุบัน[cite: 2]</li>
+                    <li>เน้นการวัดผล Net Effective Rent (NER) และลดพื้นที่ว่างเพื่อดัน Occupancy rate[cite: 2]</li>
+                </ul>
+            </div>
+
+            <!-- Engine 2 -->
+            <div class="glass-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                <span class="badge badge-2">Second Engine: Expansion</span>
+                <h3>ต่อยอด Adjacent Portfolio</h3>
+                <ul>
+                    <li>ริเริ่ม Pilot Project พื้นที่พักสายตา <b>NGEEP Power-Nap Lounge</b> (15/30 นาที) บริหารโดย Geurt Fah[cite: 2]</li>
+                    <li>บริหารสินทรัพย์บ้านพักตากอากาศระดับ Luxury (เขาใหญ่, เชียงใหม่)[cite: 2]</li>
+                    <li>ประเมินศักยภาพการปล่อยเช่าที่ดินเชิงพาณิชย์บริเวณสุขุมวิท 38[cite: 2]</li>
+                </ul>
+            </div>
+
+            <!-- Engine 3 -->
+            <div class="glass-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                <span class="badge badge-3">New S-Curve: Asset-Light</span>
+                <h3>ขยายบริการแบบ Asset-light</h3>
+                <ul>
+                    <li>บริการที่ปรึกษา Outsourced Leasing & Asset Management สำหรับลูกค้าภายนอก[cite: 2]</li>
+                    <li>ยกระดับ Premium Guest / Resident Experience สำหรับที่พักระดับไฮเอนด์[cite: 2]</li>
+                    <li>วิเคราะห์ Commercial Intelligence & Tenant-mix[cite: 2]</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Tenant Pipeline Section -->
+        <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #E2E8F0;">Proposed Tenant Allocation & Commercial Opportunities</h2>
+        <div class="tenant-grid">
+            
+            <div class="tenant-item">
+                <h4>Charter</h4>
+                <p>Pub, DJ & After-Work Lounge[cite: 2]</p>
+                <p class="metric-highlight" style="margin-top: 0.5rem;">Floor 24 | 943.65 sq.m.[cite: 2]</p>
+            </div>
+
+            <div class="tenant-item">
+                <h4>Cubic Social Club</h4>
+                <p>Premium Fitness & Wellness[cite: 2]</p>
+                <p class="metric-highlight" style="margin-top: 0.5rem;">Floor 17 | Up to 840.00 sq.m.[cite: 2]</p>
+            </div>
+
+            <div class="tenant-item">
+                <h4>Too Fast To Sleep</h4>
+                <p>Study + Work Lab (Conditional)[cite: 2]</p>
+                <p class="metric-highlight" style="margin-top: 0.5rem;">Floor 13 | 155.86 - 409.95 sq.m.[cite: 2]</p>
+            </div>
+
+            <div class="tenant-item">
+                <h4>Pre-loved Luxury Fashion</h4>
+                <p>Curated Designer Resale[cite: 2]</p>
+                <p class="metric-highlight" style="margin-top: 0.5rem;">Unit B202 | 94.89 sq.m.[cite: 2]</p>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script>
+    // Initialize VanillaTilt for 3D effect fallback in case auto-init fails
+    VanillaTilt.init(document.querySelectorAll(".glass-card"), {
+        max: 10,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.15
+    });
+</script>
+
+</body>
+</html>
